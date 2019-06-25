@@ -13,6 +13,7 @@ export default class AreaForm extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.post = this.post.bind(this); // not sure this is needed
 		this.submit = this.submit.bind(this);
+		this.dbTest = this.dbTest.bind(this);
 	}
 
 	handleChange(event) {
@@ -41,6 +42,9 @@ export default class AreaForm extends Component {
 			});
 		this.setState({ completed: true });
 	}
+	async dbTest() {
+		await fetch('/all');
+	}
 
 	render() {
 		return (
@@ -56,7 +60,7 @@ export default class AreaForm extends Component {
 						required
 					/>
 					<button type="submit">Save</button>
-					<button>Clear</button>
+					<button onClick={this.dbTest}>Clear</button>
 				</form>
 			</div>
 		);
