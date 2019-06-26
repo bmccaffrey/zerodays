@@ -24,4 +24,10 @@ app.get('/all', async (req, res) => {
 	}
 });
 
+app.post('/api/authenticate', async (req, res) => {
+	const { email, password } = req.body;
+	const user = User.getUser(email);
+	user.verify(password);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
