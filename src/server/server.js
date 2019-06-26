@@ -39,4 +39,8 @@ app.post('/api/authenticate', async (req, res) => {
 	return res.status(401).json({ error: 'Incorrect credentials' });
 });
 
+app.get('/api/secret', Auth.withAuth, async (req, res) => {
+	res.send('Test');
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
