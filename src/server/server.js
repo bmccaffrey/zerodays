@@ -13,10 +13,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Connect to DB
 PGClient.connect();
-const person = new User('bob', 'stuff');
 
 app.get('/all', async (req, res) => {
-	console.log(person);
 	try {
 		const { rows } = await PGClient.query('SELECT * FROM activity;');
 		console.log(rows);
