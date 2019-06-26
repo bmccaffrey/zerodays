@@ -3,6 +3,7 @@ const express = require('express');
 
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const PGClient = require('../server/db');
 const User = require('./User');
 const Auth = require('./auth');
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Connect to DB
 PGClient.connect();
