@@ -43,4 +43,8 @@ app.get('/api/secret', Auth.withAuth, async (req, res) => {
 	res.send('Test');
 });
 
+app.get('/checkToken', Auth.withAuth, async (req, res) => {
+	res.sendStatus(200);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
