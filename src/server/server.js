@@ -26,8 +26,11 @@ app.get('/all', async (req, res) => {
 
 app.post('/api/authenticate', async (req, res) => {
 	const { email, password } = req.body;
+	// validate params
 	const user = User.getUser(email);
-	user.verify(password);
+	// add conditional: if (!user) { res.status(404).json({error: User not found})}
+	user.verify(password); // call if passes check
+	// create and issue JWT
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
