@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const PGClient = require('../server/db');
 const User = require('./User');
+const Auth = require('./auth');
 
 const PORT = process.env.PORT || 5000;
 
@@ -24,13 +25,16 @@ app.get('/all', async (req, res) => {
 	}
 });
 
+// probably should wrap in try / catch
 app.post('/api/authenticate', async (req, res) => {
 	const { email, password } = req.body;
-	// validate params
-	const user = User.getUser(email);
-	// add conditional: if (!user) { res.status(404).json({error: User not found})}
-	user.verify(password); // call if passes check
-	// create and issue JWT
+	const user = await User.getUser(email);
+	const correctPassword = await user.verify(password);
+	if (user && correctPassword) {
+		const token = await Auth.createToken(email);
+		return res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+	}
+	return res.status(401).json({ error: 'Incorrect credentials' });
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
