@@ -5,6 +5,7 @@ import Home from './Components/Home';
 import TokenTester from './Components/TokenTester';
 import Login from './Components/Login';
 import withAuth from './Components/Utilities/withAuth';
+import LogoutButton from './Components/Elements/LogoutButton';
 
 const App = () => (
 	<Router>
@@ -19,6 +20,9 @@ const App = () => (
 				</li>
 				<li>
 					<Link to="/login">Login</Link>
+				</li>
+				<li>
+					<LogoutButton />
 				</li>
 			</ul>
 			<Switch>

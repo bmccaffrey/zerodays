@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function logout() {
 	fetch('/removeToken')
@@ -6,6 +7,7 @@ function logout() {
 			if (res.status === 200) {
 				console.log('Should be removed');
 			} else {
+				alert('Unable to logout');
 				const error = new Error(res.error);
 				throw error;
 			}
@@ -18,7 +20,9 @@ function logout() {
 const LogoutButton = () => {
 	return (
 		<React.Fragment>
-			<button onClick={logout}>Logout</button>
+			<button onClick={logout}>
+				<Link to="/">Logout</Link>
+			</button>
 		</React.Fragment>
 	);
 };
