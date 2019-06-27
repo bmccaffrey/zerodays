@@ -6,7 +6,23 @@ import TokenTester from './Components/TokenTester';
 import Login from './Components/Login';
 import withAuth from './Components/Utilities/withAuth';
 import LogoutButton from './Components/Elements/LogoutButton';
-
+import GetActs from './Components/Activity';
+let staticData = [
+	{
+		id: 1,
+		name: 'Saint',
+		streak: 1,
+		last: null,
+		username: 'bryan.patrick.mccaffrey@gmail.com'
+	},
+	{
+		id: 2,
+		name: 'test',
+		streak: 3,
+		last: null,
+		username: 'bryan.patrick.mccaffrey@gmail.com'
+	}
+];
 const App = () => (
 	<Router>
 		<div>
@@ -25,6 +41,7 @@ const App = () => (
 					<LogoutButton />
 				</li>
 			</ul>
+			<GetActs activities={staticData} />
 			<Switch>
 				<Route path="/" exact component={Home} />
 				<Route path="/secret" component={withAuth(TokenTester)} />
