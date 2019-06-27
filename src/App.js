@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import AreaInput from './Components/home';
+import Login from './Components/Login';
 
 function App() {
 	return (
 		<div className="App">
-			<AreaInput />
+			<Login />
 		</div>
 	);
 }
