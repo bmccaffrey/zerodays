@@ -4,6 +4,7 @@ import './App.css';
 import Home from './Components/Home';
 import TokenTester from './Components/TokenTester';
 import Login from './Components/Login';
+import withAuth from './Components/Utilities/withAuth';
 
 const App = () => (
 	<Router>
@@ -22,7 +23,7 @@ const App = () => (
 			</ul>
 			<Switch>
 				<Route path="/" exact component={Home} />
-				<Route path="/secret" component={TokenTester} />
+				<Route path="/secret" component={withAuth(TokenTester)} />
 				<Route path="/login" component={Login} />
 			</Switch>
 		</div>
