@@ -56,4 +56,8 @@ app.get('/checkToken', Auth.withAuth, async (req, res) => {
 	res.sendStatus(200);
 });
 
+app.get('/removeToken', Auth.withAuth, async (req, res) => {
+	res.clearCookie('token').sendStatus(200);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
