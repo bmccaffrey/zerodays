@@ -1,7 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './Components/home';
+import Home from './Components/Home';
+import TokenTester from './Components/TokenTester';
 import Login from './Components/Login';
 
 const App = () => (
@@ -13,12 +14,12 @@ const App = () => (
 					<Link to="/">Home</Link>
 				</li>
 				<li>
-					<Link to="/login">Login</Link>
+					<Link to="/secret">Protected Route</Link>
 				</li>
 			</ul>
 			<Switch>
 				<Route path="/" exact component={Home} />
-				<Route path="/login" exact component={Login} />
+				<Route path="/secret" exact component={TokenTester} />
 			</Switch>
 		</div>
 	</Router>

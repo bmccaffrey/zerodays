@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class AreaForm extends Component {
+export default class TokenTester extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -9,7 +9,7 @@ export default class AreaForm extends Component {
 	}
 
 	componentDidMount() {
-		fetch('/api/home')
+		fetch('/api/secret')
 			.then(res => res.text())
 			.then(res => this.setState({ message: res }));
 	}
@@ -17,7 +17,7 @@ export default class AreaForm extends Component {
 	render() {
 		return (
 			<div>
-				<h1>Home</h1>
+				<h1>Secret</h1>
 				<p>{this.state.message}</p>
 			</div>
 		);

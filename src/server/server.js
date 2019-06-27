@@ -17,6 +17,14 @@ app.use(cookieParser());
 // Connect to DB
 PGClient.connect();
 
+app.get('/api/home', (req, res) => {
+	res.send('Welcome!');
+});
+
+app.get('/api/secret', Auth.withAuth, (req, res) => {
+	res.send('The password is password');
+});
+
 app.get('/all', async (req, res) => {
 	try {
 		const { rows } = await PGClient.query('SELECT * FROM activity;');
