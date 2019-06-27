@@ -16,10 +16,14 @@ const App = () => (
 				<li>
 					<Link to="/secret">Protected Route</Link>
 				</li>
+				<li>
+					<Link to="/login">Login</Link>
+				</li>
 			</ul>
 			<Switch>
 				<Route path="/" exact component={Home} />
-				<Route path="/secret" exact component={TokenTester} />
+				<Route path="/secret" component={TokenTester} />
+				<Route path="/login" component={Login} />
 			</Switch>
 		</div>
 	</Router>
