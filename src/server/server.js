@@ -35,16 +35,17 @@ app.get('/all', async (req, res) => {
 	}
 });
 
-// probably should wrap in try / catch
 app.post('/api/authenticate', async (req, res) => {
 	const { email, password } = req.body;
-	const user = await User.getUser(email);
-	const correctPassword = await user.verify(password);
-	if (user && correctPassword) {
+	try {
+		const user = await User.getUser(email);
+		const correctPassword = await user.verify(password);
 		const token = await Auth.createToken(email);
 		return res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+	} catch (e) {
+		console.error(e);
+		return res.status(401).json({ error: 'Incorrect credentials' });
 	}
-	return res.status(401).json({ error: 'Incorrect credentials' });
 });
 
 app.get('/api/secret', Auth.withAuth, async (req, res) => {
