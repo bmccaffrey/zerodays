@@ -6,12 +6,12 @@ class User {
 	constructor(username, password) {
 		this.username = username;
 		this.password = password;
-		this.hashedPassword = undefined;
+		// this.hashedPassword = undefined;
 	}
 
 	save() {
 		bcrypt.hash(this.password, saltRounds).then(hash => {
-			this.hashedPassword = hash;
+			this.password = hash;
 		});
 	}
 
@@ -19,35 +19,31 @@ class User {
 	 *
 	 * @param {string} password
 	 */
-	verify(password) {
-		let hash = this.hashedPassword;
-		bcrypt
-			.compare(password, hash)
-			.then(function(res) {
-				console.log(res);
-			})
-			.catch(err => console.log(err));
+	async verify(password) {
+		try {
+			const hash = this.password;
+			const isCorrect = await bcrypt.compare(password, hash);
+			console.log('SUCCESS');
+			return isCorrect;
+		} catch (e) {
+			console.error(e);
+		}
 	}
 
 	/** Verify User Exists
 	 *
 	 * @param {string} email
 	 */
-	static getUser(email) {
-		const text = 'SELECT * FROM users WHERE email = ($1)';
-		const values = [email];
-		PGClient.query(text, values)
-			.then(res => {
-				let results = res.rows[0];
-				if (!results) {
-					console.log('Return an Error Message');
-				} else {
-					console.log(results);
-					const { password } = res.rows[0];
-					this.hashedPassword = password;
-				}
-			})
-			.catch(err => console.log(err));
+	static async getUser(email) {
+		try {
+			const text = 'SELECT * FROM users WHERE email = ($1)';
+			const values = [email];
+			const { rows } = await PGClient.query(text, values);
+			const { password } = rows[0];
+			return new User(email, password);
+		} catch (e) {
+			console.error(e);
+		}
 	}
 }
 
