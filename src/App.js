@@ -13,14 +13,16 @@ let staticData = [
 		name: 'Saint',
 		streak: 1,
 		last: null,
-		username: 'bryan.patrick.mccaffrey@gmail.com'
+		username: 'test@example.com',
+		nonzero: '2019-06-27T05:00:00.000Z'
 	},
 	{
 		id: 2,
 		name: 'test',
 		streak: 3,
 		last: null,
-		username: 'bryan.patrick.mccaffrey@gmail.com'
+		username: 'test@example.com',
+		nonzero: '2019-06-27T05:00:00.000Z'
 	}
 ];
 const App = () => (
