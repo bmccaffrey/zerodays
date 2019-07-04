@@ -12,6 +12,10 @@ function save() {
 	alert('Simulate Save');
 }
 
+/**
+ * Enables Next Sibling if Checked
+ * @param {*} event
+ */
 function handleCheck(event) {
 	if (event.target.checked) {
 		event.target.nextSibling.disabled = false;
@@ -24,6 +28,14 @@ const RefreshButton = () => (
 	<button onClick={getActivites}>Get Activities</button>
 );
 
+// Title, Checkbox, Save Button, Streak Counter, Last 0 Day Reminder
+// Could be Form
+// Disappear after Saving or Submitting
+/**
+ *
+ * @param {{name: string, streak: number, last: Date}} props
+ * @returns Title, Checkbox, Save Button, Streak Counter, Lasy 0 Day Reminder
+ */
 const ActivityDisplay = props => (
 	<div style={{ border: '1px solid black' }}>
 		<div>{props.name}</div>
@@ -40,9 +52,14 @@ const ActivityDisplay = props => (
 	</div>
 );
 
+/**
+ * Iterates through array of activities & passes to ActivityDisplay()
+ * @param {[{}]} props
+ */
 const Activities = props => {
 	return (
 		<React.Fragment>
+			<RefreshButton />
 			{props.activities.map(act => ActivityDisplay(act))}
 		</React.Fragment>
 	);
