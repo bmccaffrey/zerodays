@@ -38,9 +38,27 @@ function handleCheck(event) {
 	}
 }
 
+function updateActivity() {
+	let name = 'Something';
+	let streak = 1;
+	let username = 'Somebody';
+	let nonzero = '2019-06-27T05:00:00.000Z';
+	let last = '2019-07-06T05:00:00.000Z';
+	let x = { name, streak, username, nonzero, last };
+	return fetch('/api/update', {
+		method: 'POST',
+		body: JSON.stringify(x),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+}
+
 const RefreshButton = () => (
 	<button onClick={getActivites}>Get Activities</button>
 );
+
+const TestButton = () => <button onClick={updateActivity}>Test Update</button>;
 
 // Title, Checkbox, Save Button, Streak Counter, Last 0 Day Reminder
 // Could be Form
@@ -74,6 +92,7 @@ const Activities = props => {
 	return (
 		<React.Fragment>
 			<RefreshButton />
+			<TestButton />
 			{props.activities.map(act => ActivityDisplay(act))}
 		</React.Fragment>
 	);

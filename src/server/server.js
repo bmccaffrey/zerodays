@@ -60,4 +60,23 @@ app.get('/removeToken', Auth.withAuth, async (req, res) => {
 	res.clearCookie('token').sendStatus(200);
 });
 
+app.post('/api/update', async (req, res) => {
+	let { name, streak, username, nonzero, last } = req.body;
+	const commandAndTable = 'UPDATE activity ';
+	let setClause = 'SET streak = ($1), ';
+	const whereClause = ' WHERE name = ($3) AND username = ($4)';
+	const today = new Date().toISOString();
+
+	let determineField = streak
+		? (() => {
+				streak++;
+				return 'nonzero = ($2)';
+		  })()
+		: 'last = ($2)';
+	setClause += determineField;
+	const updateStatement = commandAndTable + setClause + whereClause;
+
+	res.status(200).send(updateStatement);
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

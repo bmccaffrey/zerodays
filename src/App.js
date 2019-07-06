@@ -11,10 +11,10 @@ let staticData = [
 	{
 		id: 1,
 		name: 'Saint',
-		streak: 1,
-		last: null,
+		streak: 7,
+		last: '2019-06-27T05:00:00.000Z',
 		username: 'test@example.com',
-		nonzero: '2019-06-27T05:00:00.000Z'
+		nonzero: '2019-07-06T05:00:00.000Z'
 	},
 	{
 		id: 2,
