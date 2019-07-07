@@ -46,7 +46,7 @@ function updateActivity() {
 	let last = '2019-07-06T05:00:00.000Z';
 	let x = { name, streak, username, nonzero, last };
 	return fetch('/api/update', {
-		method: 'POST',
+		method: 'PUT',
 		body: JSON.stringify(x),
 		headers: {
 			'Content-Type': 'application/json'

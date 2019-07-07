@@ -60,7 +60,7 @@ app.get('/removeToken', Auth.withAuth, async (req, res) => {
 	res.clearCookie('token').sendStatus(200);
 });
 
-app.post('/api/update', async (req, res) => {
+app.put('/api/update', async (req, res) => {
 	let { name, streak, username, nonzero, last } = req.body;
 	const commandAndTable = 'UPDATE activity ';
 	let setClause = 'SET streak = ($1), ';
