@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const PGClient = require('../server/db');
+const db = require('../server/db');
 const User = require('./User');
 const Auth = require('./auth');
 
@@ -13,9 +13,6 @@ const PORT = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-// Connect to DB
-PGClient.connect();
 
 app.get('/api/home', (req, res) => {
 	res.send('Welcome!');
@@ -27,7 +24,7 @@ app.get('/api/secret', Auth.withAuth, (req, res) => {
 
 app.get('/all', async (req, res) => {
 	try {
-		const { rows } = await PGClient.query('SELECT * FROM activity;');
+		const { rows } = await db.query('SELECT * FROM activity;');
 		console.log(rows);
 		res.send(rows);
 	} catch (e) {
@@ -67,6 +64,10 @@ app.put('/api/update', async (req, res) => {
 	const whereClause = ' WHERE name = ($3) AND username = ($4)';
 	const today = new Date().toISOString();
 
+	/**
+	 * if streak > 1, increment & return nonzero, so it can be set to today's date
+	 * else, return last, so it can be set to today
+	 */
 	let determineField = streak
 		? (() => {
 				streak++;
@@ -75,7 +76,9 @@ app.put('/api/update', async (req, res) => {
 		: 'last = ($2)';
 	setClause += determineField;
 	const updateStatement = commandAndTable + setClause + whereClause;
-
+	const values = [streak, today, name, username];
+	const results = await db.query(updateStatement, values);
+	console.log(results);
 	res.status(200).send(updateStatement);
 });
 
