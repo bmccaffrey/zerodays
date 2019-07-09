@@ -25,7 +25,7 @@ app.get('/api/secret', Auth.withAuth, (req, res) => {
 app.get('/all', async (req, res) => {
 	try {
 		const { rows } = await db.query('SELECT * FROM activity;');
-		console.log(rows);
+		// console.log(rows);
 		res.send(rows);
 	} catch (e) {
 		console.error(e);
