@@ -1,32 +1,27 @@
-	/**
-	 * Increment streak, if nonzero is present & isn't a zeroday.
-	 * Set streak to 1, otherwise.
-	 * Sets streak based on the value of nonzero
-	 * @param {*} activity
-	 * @returns {*} clonedActivity
-	 */
-	updateStreak(activity) {
-		let { nonzero, streak } = activity;
-		let clonedActivity = deepClone(activity);
-		const currentStreak = nonzero && !isZeroDay(nonzero) ? streak + 1 : 1;
-		clonedActivity.streak = currentStreak;
-		return clonedActivity;
+class Activity {
+	constructor(object) {
+		const { name, streak, last, username } = object;
+		this.name = name;
+		this.streak = streak;
+		this.last = last;
+		this.username = username;
 	}
-
-	/**
- * Determine if has been > 1 Day Since Progressing
- * @param {Date} dateFromProps
- * @returns {boolean} Diff > 48 Hours
- */
-function isZeroDay(dateFromProps) {
-	let lastNonZeroDay = new Date(dateFromProps);
-	let today = new Date();
-	const msInDay = 3600000;
-	let diff = today - lastNonZeroDay;
-	let hoursDiff = diff / msInDay;
-	return hoursDiff >= 48;
+	isZeroDay() {
+		let lastDayRecorded = new Date(this.last);
+		let today = new Date();
+		const msInDay = 3600000;
+		let diff = today - lastNonZeroDay;
+		let hoursDiff = diff / msInDay;
+		return hoursDiff >= 48;
+	}
+	updateStreak() {
+		const shouldResetStreak = this.isZeroDay();
+		if (shouldResetStreak) {
+			this.streak = 1;
+		} else {
+			this.streak += 1;
+		}
+	}
 }
 
-function deepClone(object) {
-	return JSON.parse(JSON.stringify(object));
-}
+module.exports = Activity;
