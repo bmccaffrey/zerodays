@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const db = require('../server/db');
 const User = require('./User');
 const Auth = require('./auth');
+const Activity = require('./Activity');
 
 const PORT = process.env.PORT || 5000;
 
@@ -58,28 +59,9 @@ app.get('/removeToken', Auth.withAuth, async (req, res) => {
 });
 
 app.put('/api/update', async (req, res) => {
-	let { name, streak, username, nonzero, last } = req.body;
-	const commandAndTable = 'UPDATE activity ';
-	let setClause = 'SET streak = ($1), ';
-	const whereClause = ' WHERE name = ($3) AND username = ($4)';
-	const today = new Date().toISOString();
-
-	/**
-	 * if streak > 1, increment & return nonzero, so it can be set to today's date
-	 * else, return last, so it can be set to today
-	 */
-	let determineField = streak
-		? (() => {
-				streak++;
-				return 'nonzero = ($2)';
-		  })()
-		: 'last = ($2)';
-	setClause += determineField;
-	const updateStatement = commandAndTable + setClause + whereClause;
-	const values = [streak, today, name, username];
-	const results = await db.query(updateStatement, values);
-	console.log(results);
-	res.status(200).send(updateStatement);
+	const activity = new Activity(req.body);
+	await activity.update();
+	res.sendStatus(200);
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
