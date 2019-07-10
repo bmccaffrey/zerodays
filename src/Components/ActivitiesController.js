@@ -1,24 +1,6 @@
 import React, { Component } from 'react';
 import parseJsonResponse from './Utilities/JsonParser';
 
-/**
- * Determine if has been > 1 Day Since Progressing
- * @param {Date} dateFromProps
- * @returns {boolean} Diff > 48 Hours
- */
-function isZeroDay(dateFromProps) {
-	let lastNonZeroDay = new Date(dateFromProps);
-	let today = new Date();
-	const msInDay = 3600000;
-	let diff = today - lastNonZeroDay;
-	let hoursDiff = diff / msInDay;
-	return hoursDiff >= 48;
-}
-
-function deepClone(object) {
-	return JSON.parse(JSON.stringify(object));
-}
-
 export default class ActivitiesController extends Component {
 	constructor(props) {
 		super(props);
@@ -84,28 +66,12 @@ export default class ActivitiesController extends Component {
 		return activity;
 	}
 
-	/**
-	 * Increment streak, if nonzero is present & isn't a zeroday.
-	 * Set streak to 1, otherwise.
-	 * Sets streak based on the value of nonzero
-	 * @param {*} activity
-	 * @returns {*} clonedActivity
-	 */
-	updateStreak(activity) {
-		let { nonzero, streak } = activity;
-		let clonedActivity = deepClone(activity);
-		const currentStreak = nonzero && !isZeroDay(nonzero) ? streak + 1 : 1;
-		clonedActivity.streak = currentStreak;
-		return clonedActivity;
-	}
-
 	async handleCheck(event) {
 		let activity = await this.getActivityFromEvent(event);
 		if (!activity) {
 			throw new Error('unable to get activity from event id');
 		}
-		const updatedActivity = this.updateStreak(activity);
-		this.updateActivity(updatedActivity)
+		this.updateActivity(activity)
 			.then(() => {
 				console.log('Updated');
 			})
