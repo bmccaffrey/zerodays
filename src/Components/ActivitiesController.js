@@ -84,10 +84,19 @@ export default class ActivitiesController extends Component {
 		return activity;
 	}
 
+	/**
+	 * Increment streak, if nonzero is present & isn't a zeroday.
+	 * Set streak to 1, otherwise.
+	 * Sets streak based on the value of nonzero
+	 * @param {*} activity
+	 * @returns {*} clonedActivity
+	 */
 	updateStreak(activity) {
 		let { nonzero, streak } = activity;
 		let clonedActivity = deepClone(activity);
-		clonedActivity.streak = nonzero && isZeroDay(nonzero) ? streak++ : 1;
+		const currentStreak = nonzero && !isZeroDay(nonzero) ? streak + 1 : 1;
+		clonedActivity.streak = currentStreak;
+		return clonedActivity;
 	}
 
 	async handleCheck(event) {
@@ -98,7 +107,7 @@ export default class ActivitiesController extends Component {
 		const updatedActivity = this.updateStreak(activity);
 		this.updateActivity(updatedActivity)
 			.then(() => {
-				// some logic here
+				console.log('Updated');
 			})
 			.catch(err => {
 				console.error(err);
@@ -111,6 +120,11 @@ export default class ActivitiesController extends Component {
 		console.log('test');
 	}
 
+	/**
+	 * POST with activity to update DB
+	 * @param {*} activityObject stuff
+	 * @returns {*} Promise: fetch
+	 */
 	updateActivity(activityObject) {
 		return fetch('/api/update', {
 			method: 'PUT',
