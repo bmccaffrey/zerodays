@@ -26,7 +26,6 @@ app.get('/api/secret', Auth.withAuth, (req, res) => {
 app.get('/all', async (req, res) => {
 	try {
 		const { rows } = await db.query('SELECT * FROM activity;');
-		// console.log(rows);
 		res.send(rows);
 	} catch (e) {
 		console.error(e);
@@ -59,9 +58,14 @@ app.get('/removeToken', Auth.withAuth, async (req, res) => {
 });
 
 app.put('/api/update', async (req, res) => {
-	const activity = new Activity(req.body);
-	await activity.update();
-	res.sendStatus(200);
+	try {
+		const activity = new Activity(req.body);
+		await activity.update();
+		return res.sendStatus(200);
+	} catch (e) {
+		console.error(e);
+		return res.status(500).json({ error: 'Unable to update activity' });
+	}
 });
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
