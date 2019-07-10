@@ -1,12 +1,11 @@
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const PGClient = require('../server/db');
+const db = require('../server/db');
 
 class User {
 	constructor(username, password) {
 		this.username = username;
 		this.password = password;
-		// this.hashedPassword = undefined;
 	}
 
 	save() {
@@ -38,7 +37,7 @@ class User {
 		try {
 			const text = 'SELECT * FROM users WHERE email = ($1)';
 			const values = [email];
-			const { rows } = await PGClient.query(text, values);
+			const { rows } = await db.query(text, values);
 			const { password } = rows[0];
 			return new User(email, password);
 		} catch (e) {
