@@ -22,6 +22,7 @@ const StyledFooter = styled.footer`
 const FlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
+	margin: 0px 15px;
 `;
 
 const Line = styled.div`
