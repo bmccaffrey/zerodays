@@ -5,16 +5,25 @@ import Login from './Components/Login';
 import withAuth from './Components/Utilities/withAuth';
 import ActivitiesController from './Components/ActivitiesController';
 import Header from './Components/Header';
+import Footer from './Components/Footer';
+import styled from 'styled-components';
+
 const App = () => (
 	<Router>
-		<div>
+		<Container>
 			<Header />
 			<Switch>
 				<Route path="/" exact component={withAuth(ActivitiesController)} />
 				<Route path="/login" component={Login} />
 			</Switch>
-		</div>
+			<Footer />
+		</Container>
 	</Router>
 );
+
+const Container = styled.div`
+	position: relative;
+	min-height: 100vh;
+`;
 
 export default App;
