@@ -57,6 +57,21 @@ export default class ActivitiesController extends Component {
 		return activity;
 	}
 
+	/**
+	 * POST with activity to update DB
+	 * @param {*} activityObject stuff
+	 * @returns {*} Promise: fetch
+	 */
+	updateActivity(activityObject) {
+		return fetch('/api/update', {
+			method: 'PUT',
+			body: JSON.stringify(activityObject),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+	}
+
 	async handleCheck(event) {
 		let activity = await this.getActivityFromEvent(event);
 		if (!activity) {
@@ -73,21 +88,6 @@ export default class ActivitiesController extends Component {
 			});
 	}
 
-	/**
-	 * POST with activity to update DB
-	 * @param {*} activityObject stuff
-	 * @returns {*} Promise: fetch
-	 */
-	updateActivity(activityObject) {
-		return fetch('/api/update', {
-			method: 'PUT',
-			body: JSON.stringify(activityObject),
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-	}
-
 	displayActivity(stuff) {
 		return (
 			<div style={{ border: '1px solid black' }} key={stuff.id}>
@@ -97,9 +97,6 @@ export default class ActivitiesController extends Component {
 					id={stuff.name + '-checkbox'}
 					onChange={this.handleCheck}
 				/>
-				<button onClick={this.save} disabled>
-					Save
-				</button>
 				<div>Streak: {stuff.streak}</div>
 				<div>Last Zero Day: {stuff.last}</div>
 			</div>
