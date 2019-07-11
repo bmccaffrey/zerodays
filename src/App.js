@@ -11,15 +11,21 @@ import styled from 'styled-components';
 const App = () => (
 	<Router>
 		<Container>
-			<Header />
-			<Switch>
-				<Route path="/" exact component={withAuth(ActivitiesController)} />
-				<Route path="/login" component={Login} />
-			</Switch>
-			<Footer />
+			<FooterPadding>
+				<Header />
+				<Switch>
+					<Route path="/" exact component={withAuth(ActivitiesController)} />
+					<Route path="/login" component={Login} />
+				</Switch>
+				<Footer />
+			</FooterPadding>
 		</Container>
 	</Router>
 );
+
+const FooterPadding = styled.div`
+	padding-bottom: 2.5rem;
+`;
 
 const Container = styled.div`
 	position: relative;
