@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import parseJsonResponse from './Utilities/JsonParser';
+import styled from 'styled-components';
 
 export default class ActivitiesController extends Component {
 	constructor(props) {
@@ -90,16 +91,12 @@ export default class ActivitiesController extends Component {
 
 	displayActivity(stuff) {
 		return (
-			<div style={{ border: '1px solid black' }} key={stuff.id}>
-				<div>{stuff.name}</div>
-				<input
-					type="checkbox"
-					id={stuff.name + '-checkbox'}
-					onChange={this.handleCheck}
-				/>
-				<div>Streak: {stuff.streak}</div>
-				<div>Last Zero Day: {stuff.last}</div>
-			</div>
+			<Row key={stuff.id}>
+				<div style={{ marginRight: 10 }}>
+					<Checkbox id={stuff.name + '-checkbox'} onChange={this.handleCheck} />
+				</div>
+				<div style={{ fontSize: 20 }}>{stuff.name}</div>
+			</Row>
 		);
 	}
 
@@ -114,3 +111,17 @@ export default class ActivitiesController extends Component {
 		);
 	}
 }
+
+const Row = styled.div`
+	margin: 15px 0px 0px 10px;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+`;
+
+const Checkbox = styled.input.attrs({
+	type: 'checkbox'
+})`
+	height: 20px;
+	width: 20px;
+`;
