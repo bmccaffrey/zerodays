@@ -15,10 +15,8 @@ export default class ActivitiesController extends Component {
 		this.displayError = this.displayError.bind(this);
 		this.displayUnknownErrorMsg = this.displayUnknownErrorMsg.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
-		this.save = this.save.bind(this);
 		this.updateActivity = this.updateActivity.bind(this);
 		this.getActivityFromEvent = this.getActivityFromEvent.bind(this);
-		this.updateStreak = this.updateStreak.bind(this);
 	}
 
 	componentDidMount() {
@@ -80,10 +78,6 @@ export default class ActivitiesController extends Component {
 				const errorMsg = err.message || 'Unable to update your activity';
 				this.setState({ feedback: errorMsg });
 			});
-	}
-
-	save() {
-		console.log('test');
 	}
 
 	/**
