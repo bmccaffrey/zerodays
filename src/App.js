@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './Components/Login';
 import withAuth from './Components/Utilities/withAuth';
-import ActivitiesController from './Components/ActivitiesController';
+import Home from './Components/Home';
+import Activities from './Components/Activity';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import styled from 'styled-components';
@@ -14,7 +15,8 @@ const App = () => (
 			<FooterPadding>
 				<Header />
 				<Switch>
-					<Route path="/" exact component={withAuth(ActivitiesController)} />
+					<Route path="/" exact component={withAuth(Activities)} />
+					<Route path="/home" component={withAuth(Home)} />
 					<Route path="/login" component={Login} />
 				</Switch>
 				<Footer />
