@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import parseJsonResponse from './Utilities/JsonParser';
+import Accordion from './Utilities/Accordion';
 
 export default class AreaForm extends Component {
 	constructor(props) {
@@ -28,7 +29,11 @@ export default class AreaForm extends Component {
 	}
 
 	displayActivities(activity) {
-		return <div>{activity.name}</div>;
+		return (
+			<Accordion>
+				<div>{activity.name}</div>
+			</Accordion>
+		);
 	}
 
 	render() {
