@@ -21,7 +21,7 @@ const LogoutButton = () => {
 	return (
 		<React.Fragment>
 			<button onClick={logout}>
-				<Link to="/">Logout</Link>
+				<Link to="/login">Logout</Link>
 			</button>
 		</React.Fragment>
 	);
