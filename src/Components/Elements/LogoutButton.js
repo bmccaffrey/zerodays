@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import StyledLink from './StyledLink';
 
 function logout() {
 	fetch('/removeToken')
@@ -20,8 +21,8 @@ function logout() {
 const LogoutButton = () => {
 	return (
 		<React.Fragment>
-			<button onClick={logout}>
-				<Link to="/login">Logout</Link>
+			<button onClick={logout} style={{ background: 'white' }}>
+				<StyledLink to="/login">Logout</StyledLink>
 			</button>
 		</React.Fragment>
 	);
