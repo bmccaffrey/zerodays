@@ -11,7 +11,6 @@ export default class ActivitiesController extends Component {
 			results: []
 		};
 		this.getActivities = this.getActivities.bind(this);
-		this.thankYouForWaiting = this.thankYouForWaiting.bind(this);
 		this.displayError = this.displayError.bind(this);
 		this.displayUnknownErrorMsg = this.displayUnknownErrorMsg.bind(this);
 		this.handleCheck = this.handleCheck.bind(this);
@@ -32,12 +31,6 @@ export default class ActivitiesController extends Component {
 
 	async getActivities() {
 		return fetch('/all').then(parseJsonResponse);
-	}
-
-	thankYouForWaiting() {
-		if (this.state.busy) {
-			return <h1>Fetching your data</h1>;
-		}
 	}
 
 	displayError() {
@@ -116,7 +109,6 @@ export default class ActivitiesController extends Component {
 	render() {
 		return (
 			<div>
-				{this.thankYouForWaiting()}
 				{this.displayError()}
 				{this.displayUnknownErrorMsg()}
 				{this.state.results.length >= 1 &&
