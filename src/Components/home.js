@@ -32,6 +32,8 @@ export default class AreaForm extends Component {
 		return (
 			<Accordion>
 				<div>{activity.name}</div>
+				<div>Streak: {activity.streak} days</div>
+				<div>Last Entry: {activity.last}</div>
 			</Accordion>
 		);
 	}
