@@ -32,8 +32,8 @@ export default class AreaForm extends Component {
 
 	displayActivities(activity) {
 		return (
-			<Accordion>
-				<div style={{ clear: 'left' }}>
+			<Accordion key={activity.id}>
+				<div style={{ clear: 'left', margin: '15px 0px' }}>
 					<img
 						src={ChevronRight}
 						alt="arrow to expand content"
