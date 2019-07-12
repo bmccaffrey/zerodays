@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import AddCircle from './Icons/AddCircle.svg';
 
 const Footer = () => {
 	return (
 		<StyledFooter>
 			<FlexContainer>
 				<Hamburger />
-				<button>+</button>
+				<img src={AddCircle} alt="add button" />
 				<span>No Zero Days</span>
 			</FlexContainer>
 		</StyledFooter>
