@@ -2,7 +2,8 @@ const db = require('../server/db');
 
 class Activity {
 	constructor(object) {
-		const { name, streak, last, username } = object;
+		const { id, name, streak, last, username } = object;
+		this._id = id;
 		this.name = name;
 		this.streak = streak;
 		this.last = last;
@@ -43,6 +44,17 @@ class Activity {
 		try {
 			const text = 'INSERT INTO activity (name, username) VALUES (($1), ($2))';
 			const values = [name, email];
+			await db.query(text, values);
+		} catch (e) {
+			console.error(e);
+		}
+	}
+
+	static async delete(id, name, email) {
+		try {
+			const text =
+				'DELETE FROM activity WHERE id = ($1), name = ($2), username = ($3)';
+			const values = [id, name, email];
 			await db.query(text, values);
 		} catch (e) {
 			console.error(e);
