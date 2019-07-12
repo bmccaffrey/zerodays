@@ -4,6 +4,11 @@ import Accordion from './Utilities/Accordion';
 import ChevronRight from './Icons/ChevronRight.svg';
 import ChevronDown from './Icons/ChevronDown.svg';
 
+const formatDate = date => {
+	const copy = new Date(date);
+	return copy.toDateString();
+};
+
 export default class AreaForm extends Component {
 	constructor(props) {
 		super(props);
@@ -41,8 +46,10 @@ export default class AreaForm extends Component {
 					/>
 					<div>{activity.name}</div>
 				</div>
-				<div>Streak: {activity.streak} days</div>
-				<div>Last Entry: {activity.last}</div>
+				<div style={{ marginLeft: '15px' }}>Streak: {activity.streak} days</div>
+				<div style={{ marginLeft: '15px' }}>
+					Last Entry: {formatDate(activity.last)}
+				</div>
 			</Accordion>
 		);
 	}
