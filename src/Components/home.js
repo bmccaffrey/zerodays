@@ -3,6 +3,7 @@ import parseJsonResponse from './Utilities/JsonParser';
 import Accordion from './Utilities/Accordion';
 import ChevronRight from './Icons/ChevronRight.svg';
 import ChevronDown from './Icons/ChevronDown.svg';
+import Footer from './Footer';
 
 const formatDate = date => {
 	const copy = new Date(date);
@@ -61,6 +62,7 @@ export default class AreaForm extends Component {
 				{this.state.feedback && <h1>{this.state.feedback}</h1>}
 				{this.state.results.length > 0 &&
 					this.state.results.map(activity => this.displayActivities(activity))}
+				<Footer />
 			</div>
 		);
 	}

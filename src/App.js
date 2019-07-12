@@ -6,7 +6,6 @@ import withAuth from './Components/Utilities/withAuth';
 import Home from './Components/Home';
 import Activities from './Components/Activity';
 import Header from './Components/Header';
-import Footer from './Components/Footer';
 import styled from 'styled-components';
 
 const App = () => (
@@ -19,7 +18,6 @@ const App = () => (
 					<Route path="/home" component={withAuth(Home)} />
 					<Route path="/login" component={Login} />
 				</Switch>
-				<Footer />
 			</FooterPadding>
 		</Container>
 	</Router>
