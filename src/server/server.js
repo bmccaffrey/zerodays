@@ -68,4 +68,17 @@ app.put('/api/update', async (req, res) => {
 	}
 });
 
+app.post('/api/create', async (req, res) => {
+	const { name } = req.body;
+	try {
+		await Activity.create(name);
+		return res.status(200).send(name + ' added!');
+	} catch (e) {
+		console.error(e);
+		return res
+			.status(500)
+			.json({ error: 'This is a poorly constructed error message' });
+	}
+});
+
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
