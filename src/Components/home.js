@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import parseJsonResponse from './Utilities/JsonParser';
 import Accordion from './Utilities/Accordion';
+import ChevronRight from './Icons/ChevronRight.svg';
+import ChevronDown from './Icons/ChevronDown.svg';
 
 export default class AreaForm extends Component {
 	constructor(props) {
@@ -31,7 +33,14 @@ export default class AreaForm extends Component {
 	displayActivities(activity) {
 		return (
 			<Accordion>
-				<div>{activity.name}</div>
+				<div style={{ clear: 'left' }}>
+					<img
+						src={ChevronRight}
+						alt="arrow to expand content"
+						style={{ float: 'left' }}
+					/>
+					<div>{activity.name}</div>
+				</div>
 				<div>Streak: {activity.streak} days</div>
 				<div>Last Entry: {activity.last}</div>
 			</Accordion>
