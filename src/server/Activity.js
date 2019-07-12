@@ -60,6 +60,13 @@ class Activity {
 			console.error(e);
 		}
 	}
+
+	async updateName(name) {
+		const text =
+			'UPDATE activity SET name = ($1) WHERE id = ($2), name = ($3), username = ($4)';
+		const values = [name, this._id, this.name, this.username];
+		await db.query(text, values);
+	}
 }
 
 module.exports = Activity;
