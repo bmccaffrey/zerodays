@@ -39,6 +39,15 @@ class Activity {
 			console.error(e);
 		}
 	}
+	static async create(name, email) {
+		try {
+			const text = 'INSERT INTO activity (name, username) VALUES (($1), ($2))';
+			const values = [name, email];
+			await db.query(text, values);
+		} catch (e) {
+			console.error(e);
+		}
+	}
 }
 
 module.exports = Activity;
