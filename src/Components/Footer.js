@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import AddCircle from './Icons/AddCircle.svg';
+import Hamburger from './Hamburger';
 
 const Footer = () => {
 	return (
@@ -25,19 +26,5 @@ const FlexContainer = styled.div`
 	justify-content: space-between;
 	margin: 0px 15px;
 `;
-
-const Line = styled.div`
-	border: 1px solid black;
-	width: 10px;
-	margin: 3px 0;
-	transition: 0.4s;
-`;
-const Hamburger = () => (
-	<div>
-		<Line />
-		<Line />
-		<Line />
-	</div>
-);
 
 export default Footer;
