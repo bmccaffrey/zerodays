@@ -108,7 +108,7 @@ export default class ActivitiesController extends Component {
 				{this.displayUnknownErrorMsg()}
 				{this.state.results.length >= 1 &&
 					this.state.results.map(activity => this.displayActivity(activity))}
-				<Footer />
+				<Footer page="todo" />
 			</div>
 		);
 	}

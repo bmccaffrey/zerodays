@@ -62,7 +62,7 @@ export default class AreaForm extends Component {
 				{this.state.feedback && <h1>{this.state.feedback}</h1>}
 				{this.state.results.length > 0 &&
 					this.state.results.map(activity => this.displayActivities(activity))}
-				<Footer />
+				<Footer page="home" />
 			</div>
 		);
 	}
