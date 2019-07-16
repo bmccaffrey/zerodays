@@ -5,6 +5,7 @@ import ChevronRight from './Icons/ChevronRight.svg';
 import ChevronDown from './Icons/ChevronDown.svg';
 import VerticalOptions from './Icons/Options.svg';
 import HorizontalOptions from './Icons/OptionsHorizontal.svg';
+import DisplayOptions from './DisplayOptions';
 
 const ActivityRow = styled.div`
 	clear: left;
@@ -13,7 +14,7 @@ const ActivityRow = styled.div`
 `;
 const GridContainer = styled.div`
 	display: grid;
-	grid-template-columns: 1fr 40px;
+	grid-template-columns: 1fr 120px;
 	margin: 15px 0px;
 `;
 const SubGrid = styled.div`
@@ -54,11 +55,12 @@ const ActivityAccordion = ({ activity }) => (
 						/>
 						<span style={{ verticalAlign: 'middle' }}>{activity.name}</span>
 					</SubGrid>
-					<Options
+					<DisplayOptions />
+					{/* <Options
 						src={on ? HorizontalOptions : VerticalOptions}
 						alt="options icon"
 						onClick={sayHi}
-					/>
+					/> */}
 				</GridContainer>
 				{on && (
 					<>
