@@ -11,13 +11,22 @@ const ActivityRow = styled.div`
 	margin: 15px 0px;
 	height: 24px;
 `;
+const GridContainer = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 40px;
+	margin: 15px 0px;
+`;
+const SubGrid = styled.div`
+	display: grid;
+	grid-template-columns: 30px 1fr;
+`;
 const Chevron = styled.img`
-	float: left;
-	margin-right: 10px;
+	grid-column-start: 1;
+	grid-column-end: 2;
 `;
 const Options = styled.img`
-	float: right;
-	margin-right: 15px;
+	grid-column-start: 3;
+	grid-column-end: 4;
 `;
 
 const formatDate = date => {
@@ -25,25 +34,32 @@ const formatDate = date => {
 	return copy.toDateString();
 };
 
+function sayHi() {
+	console.log('hi');
+}
+
 const ActivityAccordion = ({ activity }) => (
 	<Toggle>
 		{({ on, toggle }) => (
 			<div>
-				<ActivityRow onClick={toggle}>
-					<Chevron
-						src={on ? ChevronDown : ChevronRight}
-						alt={
-							on
-								? 'arrow indicating expanded content'
-								: 'arrow indicating expandable content'
-						}
-					/>
-					<span style={{ verticalAlign: 'middle' }}>{activity.name}</span>
+				<GridContainer>
+					<SubGrid onClick={toggle}>
+						<Chevron
+							src={on ? ChevronDown : ChevronRight}
+							alt={
+								on
+									? 'arrow indicating expanded content'
+									: 'arrow indicating expandable content'
+							}
+						/>
+						<span style={{ verticalAlign: 'middle' }}>{activity.name}</span>
+					</SubGrid>
 					<Options
 						src={on ? HorizontalOptions : VerticalOptions}
 						alt="options icon"
+						onClick={sayHi}
 					/>
-				</ActivityRow>
+				</GridContainer>
 				{on && (
 					<>
 						<div style={{ marginLeft: '15px' }}>
