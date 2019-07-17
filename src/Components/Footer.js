@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import AddCircle from './Icons/AddCircle.svg';
 import HamburgerIcon from './Icons/Hamburger.svg';
 import Menu from './Menu';
+import AddActivity from './AddActivity';
 
 export default class Footer extends Component {
 	constructor(props) {
@@ -36,7 +36,7 @@ export default class Footer extends Component {
 							alt="menu icon"
 							onClick={this.displayMenu}
 						/>
-						<img src={AddCircle} alt="add button" />
+						<AddActivity />
 						<span>No Zero Days</span>
 					</FlexContainer>
 				)}
