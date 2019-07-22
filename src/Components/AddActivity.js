@@ -16,6 +16,16 @@ const AddActivity = () => {
 						<Modal on={on} toggle={toggle}>
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
 								<GridContainer>
+									<h2
+										style={{
+											gridColumnStart: 1,
+											gridColumnEnd: 4,
+											textAlign: 'center',
+											marginTop: 0
+										}}
+									>
+										Add New Activity
+									</h2>
 									<input
 										type="text"
 										name="activityName"
