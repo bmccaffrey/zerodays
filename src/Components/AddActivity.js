@@ -6,6 +6,19 @@ import AddCircle from './Icons/AddCircle.svg';
 import Toggle from './Utilities/Toggle';
 import Modal from './Elements/Modal';
 
+function verifyFetch(resp) {
+	if (resp.ok) {
+		return resp;
+	}
+	return resp
+		.catch(() => {
+			return Promise.reject('Unexpected error occurred');
+		})
+		.then(err => {
+			throw err;
+		});
+}
+
 const AddActivity = () => {
 	const [name, setName] = useState('');
 	const [status, setStatus] = useState('');
@@ -19,10 +32,14 @@ const AddActivity = () => {
 			}
 		});
 	}
+
 	function createActivity() {
 		setStatus();
 		post()
-			.then(() => setStatus('success'))
+			.then(verifyFetch)
+			.then(() => {
+				setStatus('success');
+			})
 			.catch(err => {
 				console.error(err);
 				setStatus('error');
