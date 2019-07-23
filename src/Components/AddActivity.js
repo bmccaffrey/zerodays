@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Save from './Icons/Save.svg';
 import Cancel from './Icons/Cancel.svg';
 import styled from 'styled-components';
@@ -8,8 +8,7 @@ import Modal from './Elements/Modal';
 
 const AddActivity = () => {
 	const [name, setName] = useState('');
-	const [isError, setIsError] = useState(false);
-	const [isLoading, setIsLoading] = useState(false);
+	const [status, setStatus] = useState('');
 
 	function post() {
 		return fetch('/api/create', {
@@ -21,17 +20,13 @@ const AddActivity = () => {
 		});
 	}
 	function createActivity() {
-		setIsLoading(true);
+		setStatus();
 		post()
-			.then(() => {
-				console.log('Created');
-				setIsError(false);
-			})
+			.then(() => setStatus('success'))
 			.catch(err => {
 				console.error(err);
-				setIsError(true);
-			})
-			.finally(() => setIsLoading(false));
+				setStatus('error');
+			});
 	}
 
 	return (
@@ -42,45 +37,49 @@ const AddActivity = () => {
 						<img src={AddCircle} alt="add activity button" onClick={toggle} />
 						<Modal on={on} toggle={toggle}>
 							<div style={{ display: 'flex', justifyContent: 'center' }}>
-								{isError && <h1>An unexpected error occurred.</h1>}
-								{isLoading && <h1>Loading</h1>}
-								<GridContainer>
-									<h2
-										style={{
-											gridColumnStart: 1,
-											gridColumnEnd: 4,
-											textAlign: 'center',
-											marginTop: 0
-										}}
-									>
-										Add New Activity
-									</h2>
-									<input
-										type="text"
-										value={name}
-										name="activityName"
-										autoFocus
-										placeholder="Activity Name"
-										style={{
-											border: '1px solid black',
-											gridColumnStart: 1,
-											gridColumnEnd: 4
-										}}
-										onChange={e => setName(e.target.value)}
-									/>
-									<img
-										src={Cancel}
-										alt="cancels button"
-										style={{ gridColumnStart: 2, gridColumnEnd: 3 }}
-										onClick={toggle}
-									/>
-									<img
-										src={Save}
-										alt="save button"
-										style={{ gridColumnStart: 3, gridColumnEnd: 4 }}
-										onClick={() => createActivity()}
-									/>
-								</GridContainer>
+								{status === 'success' ? (
+									<h1>Success!</h1>
+								) : (
+									<GridContainer>
+										<h2
+											style={{
+												gridColumnStart: 1,
+												gridColumnEnd: 4,
+												textAlign: 'center',
+												marginTop: 0
+											}}
+										>
+											{status === 'error'
+												? 'An unexpected error occurred'
+												: 'Add New Activity'}
+										</h2>
+										<input
+											type="text"
+											value={name}
+											name="activityName"
+											autoFocus
+											placeholder="Activity Name"
+											style={{
+												border: '1px solid black',
+												gridColumnStart: 1,
+												gridColumnEnd: 4
+											}}
+											onChange={e => setName(e.target.value)}
+										/>
+										<img
+											src={Cancel}
+											alt="cancels button"
+											style={{ gridColumnStart: 2, gridColumnEnd: 3 }}
+											onClick={toggle}
+										/>
+										<img
+											src={Save}
+											alt="save button"
+											style={{ gridColumnStart: 3, gridColumnEnd: 4 }}
+											onClick={() => createActivity()}
+										/>
+									</GridContainer>
+								)}
 							</div>
 						</Modal>
 					</>
