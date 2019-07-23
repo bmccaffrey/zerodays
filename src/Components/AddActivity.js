@@ -33,12 +33,21 @@ const AddActivity = () => {
 		});
 	}
 
-	function createActivity() {
+	function resetStateAndClose(fn) {
+		setTimeout(() => {
+			setName('');
+			setStatus('');
+			fn();
+		}, 1500);
+	}
+
+	function createActivity(fn) {
 		setStatus();
 		post()
 			.then(verifyFetch)
 			.then(() => {
 				setStatus('success');
+				resetStateAndClose(fn);
 			})
 			.catch(err => {
 				console.error(err);
@@ -93,7 +102,7 @@ const AddActivity = () => {
 											src={Save}
 											alt="save button"
 											style={{ gridColumnStart: 3, gridColumnEnd: 4 }}
-											onClick={() => createActivity()}
+											onClick={() => createActivity(toggle)}
 										/>
 									</GridContainer>
 								)}
