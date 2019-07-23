@@ -102,7 +102,13 @@ const AddActivity = () => {
 											src={Save}
 											alt="save button"
 											style={{ gridColumnStart: 3, gridColumnEnd: 4 }}
-											onClick={() => createActivity(toggle)}
+											onClick={() => {
+												if (name.length > 0) {
+													createActivity(toggle);
+												}
+												return;
+											}}
+											disabled
 										/>
 									</GridContainer>
 								)}
