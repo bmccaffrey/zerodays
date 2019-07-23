@@ -69,10 +69,11 @@ app.put('/api/update', async (req, res) => {
 });
 
 app.post('/api/create', Auth.withAuth, async (req, res) => {
-	const { name, email } = req.body;
+	const { name } = req.body;
+	const { email } = req;
 	try {
 		await Activity.create(name, email);
-		return res.status(200).send(name + ' added!');
+		return res.status(201).send(name + ' added!');
 	} catch (e) {
 		console.error(e);
 		return res
